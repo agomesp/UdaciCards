@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Decks from './components/Decks'
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
+import { createMaterialTopTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
+import ViewDeck from './components/ViewDeck'
 
 const RouteConfigs = {
   Decks: {
@@ -37,9 +38,29 @@ const Tabs = createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig);
 
 const TabsContainer = createAppContainer(Tabs)
 
+const MainNavigator = createStackNavigator({
+  home: {
+    screen: TabsContainer,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  ViewDeck: {
+    screen: ViewDeck,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'black',
+      },
+    }),
+  },
+});
+
+MainNavigatorContainer = createAppContainer(MainNavigator)
+
 export default function App() {
   return (
-    <TabsContainer />
+    <MainNavigatorContainer />
   );
 }
 
