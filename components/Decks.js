@@ -6,7 +6,7 @@ import ViewDeck from './ViewDeck'
 class Decks extends Component {
   render(){
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('ViewDeck')}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('ViewDeck', {title: 'CardName'})}>
         <Deck />
       </TouchableOpacity>
     )

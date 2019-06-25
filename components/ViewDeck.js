@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class ViewDeck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'CardName'
+    }
+  }
   render(){
     return (
       <View style={styles.container}>
