@@ -10,6 +10,7 @@ class ViewDeck extends Component {
       title: 'Deck Name'
     }
   }
+
   render(){
     return (
       <View style={styles.container}>

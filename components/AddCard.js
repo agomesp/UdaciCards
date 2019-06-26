@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native'
 
 class AddCard extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -9,13 +9,13 @@ class AddCard extends Component {
   }
   render(){
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <TextInput style={styles.textInput} placeholder='Question'/>
         <TextInput style={styles.textInput} placeholder='Answer'/>
         <TouchableOpacity style={styles.submitBtn}>
           <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

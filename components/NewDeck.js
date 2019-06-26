@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native'
+import { addNewDeck } from '../utils/api'
 
 class NewDeck extends Component {
+  state = {
+    deckName: ''
+  }
+
   render(){
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behaviour='padding' style={styles.container}>
         <Text style={styles.title}>What is the title of your new deck?</Text>
-        <TextInput style={styles.textInput} placeholder='Type in the name'/>
-        <TouchableOpacity style={styles.submitBtn}>
+        <TextInput style={styles.textInput} placeholder='Type in the name' onChangeText={(name) => this.setState({deckName: name})} value={this.state.deckName}/>
+        <TouchableOpacity style={styles.submitBtn} onPress={() => addNewDeck(this.state.deckName)}>
           <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
