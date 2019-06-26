@@ -1,26 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import Questions from './Questions'
-import { withNavigation } from 'react-navigation'
 
-class ViewDeck extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Deck Name'
-    }
-  }
+class FinalResultQuestions extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Deck Title</Text>
-        <Text style={styles.text}>0 cards</Text>
-
-        <TouchableOpacity style={styles.addBtn}>
-          <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions')}>
-          <Text style={{color: 'white'}}>Start Quiz</Text>
-        </TouchableOpacity>
+        <Text>{this.props.finalResult}% correct</Text>
       </View>
     )
   }
@@ -69,5 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default withNavigation(ViewDeck)
+export default FinalResultQuestions

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Decks from './components/Decks'
 import { createMaterialTopTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import ViewDeck from './components/ViewDeck'
+import Questions from './components/Questions'
 
 const RouteConfigs = {
   Decks: {
@@ -54,6 +55,9 @@ const MainNavigator = createStackNavigator({
       },
     }),
   },
+  Questions: {
+    screen: Questions
+  }
 });
 
 MainNavigatorContainer = createAppContainer(MainNavigator)
