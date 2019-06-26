@@ -35,9 +35,14 @@ class ViewDeck extends Component {
         <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate('AddCard', {deck: deck, onGoBack: this.onGoBack})}>
           <Text>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions', {deck: deck})}>
-          <Text style={{color: 'white'}}>Start Quiz</Text>
-        </TouchableOpacity>
+        {deck.questions.length !== 0 ?
+            <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions', {deck: deck})}>
+              <Text style={{color: 'white'}}>Start Quiz</Text>
+            </TouchableOpacity>
+          :
+            <Text>No question to answer</Text>
+        }
+
       </View>
     )
   }
@@ -70,7 +75,9 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 100
+    marginTop: 100,
+    borderWidth: 1,
+    marginBottom: 5,
   },
 
   startBtn: {

@@ -48,6 +48,7 @@ class Questions extends Component {
       locationQ: this.state.locationQ + 1,
       question: this.state.questions[this.state.locationQ].question,
       answer: this.state.questions[this.state.locationQ].answer,
+      show: 'Answer',
     })
   }
 
@@ -69,18 +70,25 @@ class Questions extends Component {
               <View style={[styles.container, {borderBottomWidth: 0}]}>
                 <Text>{this.state.locationQ}/{this.state.questions.length}</Text>
                 <Text style={styles.title}>{this.state.show === 'Answer' ? this.state.question : this.state.answer}</Text>
-                <Text style={{color: 'red'}} onPress={this.reveal}>{this.state.show}</Text>
+                <Text style={{color: 'red'}} onPress={this.reveal}>Reveal {this.state.show}</Text>
+                {this.state.show === 'Question'
+                  ?
+                    <View>
+                      <TouchableOpacity style={styles.correctBtn} onPress={this.correctAnswer}>
+                        <Text style={{color: 'white'}}>CORRECT</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.incorrectBtn} onPress={this.wrongAnswer}>
+                        <Text style={{color: 'white'}}>INCORRECT</Text>
+                      </TouchableOpacity>
+                    </View>
+                  :
+                    false
+                }
 
-                <TouchableOpacity style={styles.addBtn} onPress={this.correctAnswer}>
-                  <Text>CORRECT</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.startBtn} onPress={this.wrongAnswer}>
-                  <Text style={{color: 'white'}}>INCORRECT</Text>
-                </TouchableOpacity>
               </View>
               :
                 <View>
-                  <Text>{this.state.corrects * 100 / this.state.questions.length}% questions correct</Text>
+                  <Text>{Math.round(this.state.corrects * 100 / this.state.questions.length)}% questions correct</Text>
                 </View>
               }
         </View>
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  addBtn: {
+  correctBtn: {
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
@@ -117,11 +125,13 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 100
+    marginTop: 100,
+    backgroundColor: 'green',
+    marginBottom: 5,
   },
 
-  startBtn: {
-    backgroundColor: 'black',
+  incorrectBtn: {
+    backgroundColor: 'red',
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
@@ -129,7 +139,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'white'
+    color: 'white',
   }
 });
 
