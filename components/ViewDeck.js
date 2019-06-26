@@ -35,7 +35,7 @@ class ViewDeck extends Component {
         <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate('AddCard', {deck: deck, onGoBack: this.onGoBack})}>
           <Text>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions')}>
+        <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions', {deck: deck})}>
           <Text style={{color: 'white'}}>Start Quiz</Text>
         </TouchableOpacity>
       </View>

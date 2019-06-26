@@ -9,18 +9,9 @@ class Questions extends Component {
   }
 
   state = {
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ],
-    question: 'What?',
-    answer: 'Who?',
+    questions: [],
+    question: '',
+    answer: '',
     show: 'Answer',
     locationQ: 1,
     corrects: 0,
@@ -62,8 +53,9 @@ class Questions extends Component {
 
   componentDidMount () {
     this.setState({
-      question: this.state.questions[0].question,
-      answer: this.state.questions[0].answer,
+      questions: this.props.navigation.state.params.deck.questions,
+      question: this.props.navigation.state.params.deck.questions[0].question,
+      answer: this.props.navigation.state.params.deck.questions[0].answer,
     })
   }
 
