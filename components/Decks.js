@@ -6,17 +6,24 @@ import { withNavigation } from 'react-navigation'
 import { getDecks } from '../utils/api'
 
 class Decks extends Component {
+  state = {
+    decks: {}
+  }
 
-  componentDidMount() {
-    const decks = getDecks()
-    console.log('Decks:', decks)
+  async componentDidMount() {
+    const decks = await getDecks()
+    this.setState({decks: decks})
   }
 
   render(){
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('ViewDeck')}>
-        <Deck />
-      </TouchableOpacity>
+      <View>
+        {Object.keys(this.state.decks).map((key) => (
+          <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate('ViewDeck', {deck: this.state.decks[key]})}>
+            <Deck deck={this.state.decks[key]}/>
+          </TouchableOpacity>
+        ))}
+      </View>
     )
   }
 }

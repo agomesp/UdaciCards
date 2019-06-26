@@ -6,8 +6,8 @@ class Deck extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Deck Title</Text>
-        <Text style={styles.text}>0 cards</Text>
+        <Text style={styles.title}>{this.props.deck.title}</Text>
+        <Text style={styles.text}>{this.props.deck.questions.length} cards</Text>
       </View>
     )
   }

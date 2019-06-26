@@ -12,7 +12,10 @@ class NewDeck extends Component {
       <KeyboardAvoidingView behaviour='padding' style={styles.container}>
         <Text style={styles.title}>What is the title of your new deck?</Text>
         <TextInput style={styles.textInput} placeholder='Type in the name' onChangeText={(name) => this.setState({deckName: name})} value={this.state.deckName}/>
-        <TouchableOpacity style={styles.submitBtn} onPress={() => addNewDeck(this.state.deckName)}>
+        <TouchableOpacity style={styles.submitBtn} onPress={() => {
+          addNewDeck(this.state.deckName)
+          this.props.navigation.goBack()
+        }}>
           <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

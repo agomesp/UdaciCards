@@ -5,19 +5,34 @@ import { withNavigation } from 'react-navigation'
 import AddCard from './AddCard'
 
 class ViewDeck extends Component {
+
+  state = {
+    deck: {},
+    updated: false,
+  }
+
+  onGoBack = () => {
+    this.forceUpdate()
+  }
+
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Deck Name'
+      title: navigation.state.params.deck.title
     }
   }
 
+  componentWillMount() {
+    this.setState({deck: this.props.navigation.state.params.deck})
+  }
+
   render(){
+    const deck = this.state.deck
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Deck Title</Text>
-        <Text style={styles.text}>0 cards</Text>
+        <Text style={styles.title}>{deck.title}</Text>
+        <Text style={styles.text}>{deck.questions.length} cards</Text>
 
-        <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate('AddCard')}>
+        <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate('AddCard', {deck: deck, onGoBack: this.onGoBack})}>
           <Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions')}>
