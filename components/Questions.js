@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { withNavigation } from 'react-navigation'
 
 class Questions extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -143,4 +142,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default withNavigation(Questions)
+export default Questions

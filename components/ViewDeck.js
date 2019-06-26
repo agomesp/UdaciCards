@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Questions from './Questions'
 import { withNavigation } from 'react-navigation'
+import AddCard from './AddCard'
 
 class ViewDeck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,7 +16,7 @@ class ViewDeck extends Component {
         <Text style={styles.title}>Deck Title</Text>
         <Text style={styles.text}>0 cards</Text>
 
-        <TouchableOpacity style={styles.addBtn}>
+        <TouchableOpacity style={styles.addBtn} onPress={() => this.props.navigation.navigate('AddCard')}>
           <Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions')}>

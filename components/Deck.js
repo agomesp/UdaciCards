@@ -3,9 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import ViewDeck from './ViewDeck'
 
 class Deck extends Component {
-  viewDeckDetails = () => {
-    console.log(this.props.navigation)
-  }
   render(){
     return (
       <View style={styles.container}>

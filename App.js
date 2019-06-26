@@ -6,6 +6,7 @@ import ViewDeck from './components/ViewDeck'
 import Questions from './components/Questions'
 import NewDeck from './components/NewDeck'
 import { Constants } from 'expo'
+import AddCard from './components/AddCard'
 
 function CustomStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -73,6 +74,9 @@ const MainNavigator = createStackNavigator({
   },
   Questions: {
     screen: Questions
+  },
+  AddCard: {
+    screen: AddCard
   }
 });
 
