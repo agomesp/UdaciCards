@@ -1,9 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import Decks from './components/Decks'
 import { createMaterialTopTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import ViewDeck from './components/ViewDeck'
 import Questions from './components/Questions'
+import NewDeck from './components/NewDeck'
+import { Constants } from 'expo'
+
+function CustomStatusBar ({ backgroundColor, ...props }) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent  backgroundColor={backgroundColor} {...props}/>
+    </View>
+  )
+}
 
 const RouteConfigs = {
   Decks: {
@@ -12,6 +22,12 @@ const RouteConfigs = {
       tabBarLabel: "Decks",
     }
   },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: "New Deck"
+    }
+  }
 }
 
 const TabNavigatorConfig = {
@@ -64,7 +80,10 @@ MainNavigatorContainer = createAppContainer(MainNavigator)
 
 export default function App() {
   return (
-    <MainNavigatorContainer />
+    <View style={{flex: 1}}>
+      <CustomStatusBar backgroundColor={'black'} barStyle='light-content' />
+      <MainNavigatorContainer />
+    </View>
   );
 }
 

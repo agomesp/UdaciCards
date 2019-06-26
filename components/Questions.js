@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import FinalResultQuestions from './FinalResultQuestions'
 
 class Questions extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -76,7 +75,7 @@ class Questions extends Component {
         <View style={styles.container}>
           {!finished
             ?
-              <View>
+              <View style={[styles.container, {borderBottomWidth: 0}]}>
                 <Text>{this.state.locationQ}/{this.state.questions.length}</Text>
                 <Text style={styles.title}>{this.state.show === 'Answer' ? this.state.question : this.state.answer}</Text>
                 <Text style={{color: 'red'}} onPress={this.reveal}>{this.state.show}</Text>
@@ -102,7 +101,8 @@ class Questions extends Component {
 const styles = StyleSheet.create({
   title: {
     fontSize:30,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign: 'center',
   },
   text: {
     color: "gray"
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     paddingBottom: 50,
     paddingTop:50,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   addBtn: {
