@@ -10,6 +10,7 @@ import AddCard from './components/AddCard'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
+import { setLocalNotification } from './utils/helpers'
 
 function CustomStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -85,15 +86,21 @@ const MainNavigator = createStackNavigator({
 
 MainNavigatorContainer = createAppContainer(MainNavigator)
 
-export default function App() {
-  return (
-    <Provider store={createStore(reducer)}>
-      <View style={{flex: 1}}>
-        <CustomStatusBar backgroundColor={'black'} barStyle='light-content' />
-        <MainNavigatorContainer />
-      </View>
-    </Provider>
-  );
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
+  render (){
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <CustomStatusBar backgroundColor={'black'} barStyle='light-content' />
+          <MainNavigatorContainer />
+        </View>
+      </Provider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

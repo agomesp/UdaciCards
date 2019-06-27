@@ -69,8 +69,6 @@ class Questions extends Component {
     this.resetQuiz()
   }
 
-
-
   render(){
     const finalResult = this.state.finalResult
     const finished = this.state.finished

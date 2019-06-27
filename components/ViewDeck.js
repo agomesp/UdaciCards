@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation'
 import AddCard from './AddCard'
 import { connect } from 'react-redux'
 import { addCardDeck } from '../actions/index'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class ViewDeck extends Component {
 
@@ -28,6 +29,12 @@ class ViewDeck extends Component {
     this.setState({deck: this.props.navigation.state.params.deck})
   }
 
+  startQuiz = () => {
+    clearLocalNotification()
+      .then(setLocalNotification)
+    this.props.navigation.navigate('Questions', {deck: this.state.deck})
+  }
+
   render(){
     const deck = this.state.deck
     return (
@@ -39,7 +46,7 @@ class ViewDeck extends Component {
           <Text>Add Card</Text>
         </TouchableOpacity>
         {deck.questions.length !== 0 ?
-            <TouchableOpacity style={styles.startBtn} onPress={() => this.props.navigation.navigate('Questions', {deck: deck})}>
+            <TouchableOpacity style={styles.startBtn} onPress={this.startQuiz}>
               <Text style={{color: 'white'}}>Start Quiz</Text>
             </TouchableOpacity>
           :
