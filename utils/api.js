@@ -1,5 +1,30 @@
 import { AsyncStorage } from 'react-native'
 
+const dummyData = {
+  React: {
+    title: 'React',
+    questions: [
+      {
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
+  },
+  JavaScript: {
+    title: 'JavaScript',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  }
+}
+
 export function addNewDeck(deckName) {
   return AsyncStorage.mergeItem('UdaciCards:decks', JSON.stringify({
       [deckName]: {
@@ -10,8 +35,13 @@ export function addNewDeck(deckName) {
 }
 
 export function getDecks() {
-  return AsyncStorage.getItem('UdaciCards:decks')
-    .then(res => JSON.parse(res))
+  if (AsyncStorage.getItem('UdaciCards:decks')) {
+    return AsyncStorage.getItem('UdaciCards:decks')
+      .then(res => JSON.parse(res))
+  } else {
+    return dummyData
+  }
+
 }
 
 export const addCardToDeck = async (deckTitle, card) => {
