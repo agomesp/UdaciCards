@@ -7,6 +7,9 @@ import Questions from './components/Questions'
 import NewDeck from './components/NewDeck'
 import { Constants } from 'expo'
 import AddCard from './components/AddCard'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
 
 function CustomStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -84,10 +87,12 @@ MainNavigatorContainer = createAppContainer(MainNavigator)
 
 export default function App() {
   return (
-    <View style={{flex: 1}}>
-      <CustomStatusBar backgroundColor={'black'} barStyle='light-content' />
-      <MainNavigatorContainer />
-    </View>
+    <Provider store={createStore(reducer)}>
+      <View style={{flex: 1}}>
+        <CustomStatusBar backgroundColor={'black'} barStyle='light-content' />
+        <MainNavigatorContainer />
+      </View>
+    </Provider>
   );
 }
 

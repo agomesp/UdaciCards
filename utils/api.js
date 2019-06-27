@@ -15,17 +15,17 @@ export function getDecks() {
 }
 
 export const addCardToDeck = async (deckTitle, card) => {
-  let decks = await getDecks();
+  let decks = await getDecks()
 
   if (!decks[deckTitle]) {
-    decks[deckTitle] = { name: deckTitle, questions: [{ ...card }] };
+    decks[deckTitle] = { name: deckTitle, questions: [{ ...card }] }
   } else {
-    decks[deckTitle].questions = [...decks[deckTitle].questions, card];
+    decks[deckTitle].questions = [...decks[deckTitle].questions, card]
   }
 
   try {
-    await AsyncStorage.setItem('UdaciCards:decks', JSON.stringify(decks));
+    await AsyncStorage.setItem('UdaciCards:decks', JSON.stringify(decks))
   } catch (error) {
-    console.warn('Error adding card to deck:', error);
+    console.warn('Error adding card to deck:', error)
   }
-};
+}

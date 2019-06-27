@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native'
 import { addCard, addCardToDeck } from '../utils/api'
+import { connect } from 'react-redux'
+import { addCardDeck } from '../actions/index'
 
 class AddCard extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -32,8 +34,24 @@ class AddCard extends Component {
     const data = this.state
     const question = this.state.question
     const answer = this.state.answer
+    const deckName = this.state.deckName
+    const { navigation } = this.props
+    const deck = this.state.deck
+
+    const newDeck = {
+      title: deckName,
+      questions: [
+        ...deck.questions, {
+          question,
+          answer
+        }
+      ]
+    }
+
     addCardToDeck(this.state.deckName, {question, answer})
-    this.props.navigation.navigate('ViewDeck', {deck: this.state.deck})
+    navigation.goBack()
+    navigation.state.params.onGoBack(deckName, question, answer, newDeck)
+
   }
 
   render(){
@@ -47,7 +65,7 @@ class AddCard extends Component {
               <Text style={{color: 'white'}}>Submit</Text>
             </TouchableOpacity>
           :
-          <Text>Type the question and answer</Text>          
+          <Text>Type the question and answer</Text>
         }
 
       </KeyboardAvoidingView>
@@ -90,4 +108,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default AddCard
+export default connect()(AddCard)

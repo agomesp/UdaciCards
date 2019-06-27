@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Questions from './Questions'
 import { withNavigation } from 'react-navigation'
 import AddCard from './AddCard'
+import { connect } from 'react-redux'
+import { addCardDeck } from '../actions/index'
 
 class ViewDeck extends Component {
 
@@ -11,8 +13,9 @@ class ViewDeck extends Component {
     updated: false,
   }
 
-  onGoBack = () => {
-    this.forceUpdate()
+  onGoBack = (deckName, question, answer, newDeck) => {
+    this.props.dispatch(addCardDeck({deckName, question, answer}))
+    this.setState({deck: newDeck})
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -94,4 +97,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default withNavigation(ViewDeck)
+export default withNavigation(connect()(ViewDeck))
