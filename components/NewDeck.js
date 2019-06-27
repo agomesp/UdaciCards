@@ -9,6 +9,15 @@ class NewDeck extends Component {
     deckName: ''
   }
 
+  goToDeck = () => {
+    const deck = {
+      title: this.state.deckName,
+      questions: []
+    }
+
+    this.props.navigation.navigate('ViewDeck', {deck: deck})
+  }
+
   render(){
     return (
       <KeyboardAvoidingView behaviour='padding' style={styles.container}>
@@ -19,7 +28,7 @@ class NewDeck extends Component {
             <TouchableOpacity style={styles.submitBtn} onPress={() => {
               addNewDeck(this.state.deckName)
               this.props.dispatch(createNewDeck(this.state.deckName))
-              this.props.navigation.goBack()
+              this.goToDeck()
             }}>
               <Text style={{color: 'white'}}>Submit</Text>
             </TouchableOpacity>

@@ -16,11 +16,7 @@ class Decks extends Component {
     const decks = await getDecks()
     this.props.dispatch(receiveEntries(decks))
   }
-
-  renderItem = (item) => {
-    return <Deck {...item}/>
-  }
-
+  
   render(){
     return (
       <ScrollView>
