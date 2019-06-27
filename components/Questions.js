@@ -52,13 +52,24 @@ class Questions extends Component {
     })
   }
 
-  componentDidMount () {
+  resetQuiz = () => {
     this.setState({
       questions: this.props.navigation.state.params.deck.questions,
       question: this.props.navigation.state.params.deck.questions[0].question,
       answer: this.props.navigation.state.params.deck.questions[0].answer,
+      finished: false,
+      show: 'Answer',
+      locationQ: 1,
+      corrects: 0,
+      finalResult: 0,
     })
   }
+
+  componentDidMount () {
+    this.resetQuiz()
+  }
+
+
 
   render(){
     const finalResult = this.state.finalResult
@@ -89,6 +100,12 @@ class Questions extends Component {
               :
                 <View>
                   <Text>{Math.round(this.state.corrects * 100 / this.state.questions.length)}% questions correct</Text>
+                  <TouchableOpacity style={styles.quizBtn} onPress={this.resetQuiz}>
+                    <Text>Redo</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.quizBtn} onPress={() => {this.props.navigation.goBack()}}>
+                    <Text>Go Back</Text>
+                  </TouchableOpacity>
                 </View>
               }
         </View>
@@ -140,7 +157,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
-  }
+  },
+  quizBtn: {
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 100,
+    borderWidth: 1,
+    marginBottom: 0,
+  },
 });
 
 
